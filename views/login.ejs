@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center; /* Centraliza o conteúdo do formulário */
+        }
+        form:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #000000;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #4CAF50;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        p {
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/login" method="post" name="logar" id="logar">
+        <h2>LOGIN - Acessar o Sistema</h2>
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" id="email" required/>
+        
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" id="senha" required/>
+        
+        <input type="submit" id="entrar" name="entrar" value="ENTRAR">
+        <br><br>
+        <p>Não possui Login? <a href="/cadastrar">Cadastre-se</a></p>
+    </form>
+</body>
+</html>

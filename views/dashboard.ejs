@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            color: #000000;
+            margin-top: 20px;
+        }
+        a {
+            text-decoration: none;
+            margin: 10px;
+        }
+        .button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: rgb(255, 255, 255);
+            background-color: #4CAF50;
+        }
+        .edit-button {
+            background-color: #81c784; /* Verde claro */
+        }
+        .edit-button:hover {
+            background-color: #66bb6a; /* Verde mais escuro */
+        }
+        .delete-button, .logout-button {
+            background-color: #e57373; /* Vermelho */
+            color: #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .delete-button:hover, .logout-button:hover {
+            background-color: #ef5350; /* Vermelho mais escuro */
+        }
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 80%;
+            text-align: left;
+        }
+        th, td {
+            border: 1px solid #4CAF50;
+            padding: 10px;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        td {
+            background-color: white;
+        }
+        form {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Painel de Administração</h1>
+
+    <a href="/add-livro" class="button">Cadastrar Livro</a>
+    <a href="/listarLivros" class="button">Exibir Livros</a>
+    <!-- Link para visualizar usuários leitores -->
+    <a href="/leitura" class="button"> Visualizar Usuários Leitores </a>
+
+
+    <h2>Usuários Cadastrados</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Gênero Favorito</th>
+            <th>Ações</th>
+            <th>Excluir ou Editar</th>
+        </tr>
+        <% users.forEach(user => { %>
+        <tr>
+            <td><%= user.id_usuario %></td>
+            <td><%= user.nome %></td>
+            <td><%= user.email %></td>
+            <td><%= user.genero_fav %></td>
+            <td>
+                <!-- Botões de tornar admin ou usuário comum -->
+                <% if (user.acesso === 'admin') { %>
+                  <!-- Se o usuário já for admin, exibe botão para torná-lo usuário comum -->
+                  <form action="/tornar-user/<%= user.id_usuario %>" method="POST" style="display:inline;">
+                    <button type="submit">Tornar Usuário Comum</button>
+                  </form>
+                <% } else { %>
+                  <!-- Se o usuário for comum, exibe botão para torná-lo admin -->
+                  <form action="/tornar-admin/<%= user.id_usuario %>" method="POST" style="display:inline;">
+                    <button type="submit">Tornar Admin</button>
+                  </form>
+                <% } %>
+            </td>
+            <td> 
+                <button  class="edit-button"><a href="/edit/<%= user.id_usuario %>">Editar</a></button>
+                <form action="/delete/<%= user.id_usuario %>" method="post" style="display: inline;" onsubmit="return confirmDelete()">
+                    <button type="submit"  class="delete-button" >Excluir</button>
+                </form>
+            </td>
+        </tr>
+        <% }); %>
+    </table>
+    <br/>
+    <div style="padding-top: 45px;">
+    <a href="/logout" class="button logout-button">Logout</a>
+    </div>
+    <script src="/js/scriptDel.js"></script>
+    <script src="/js/scriptAcesso.js"></script>
+</body>
+</html>

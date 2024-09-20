@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editar Usuário</title>
+  <style>
+    body {
+      background-color: white;
+      color: #333;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h2 {
+      color: black; /* Black color for headings */
+      padding-bottom: 20px; /* Padding bottom for heading */
+      margin: 0; /* Remove default margin */
+    }
+
+    form {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 300px; /* Adjust width as needed */
+    }
+
+    label {
+      margin-bottom: 5px;
+      display: block;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #4CAF50; /* Green button */
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049; /* Darker green on hover */
+    }
+
+    .voltar {
+      background-color: #eb1212; /* Green background for 'Voltar' */
+      color: white;
+      padding-top: 15px;
+      text-align: center;
+      display: block;
+      margin-top: 10px; /* Space above 'Voltar' */
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      color: #4CAF50; /* Green link */
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <form action="/edit/<%= user.id_usuario %>" method="POST" id="editar" name="editar">
+    <h2>Editar Usuário</h2>
+    <label>Nome:</label>
+    <input type="text" name="nome" id="nome" value="<%= user.nome %>" required>
+    
+    <label>E-mail:</label>
+    <input type="email" name="email" id="email" value="<%= user.email %>" required>
+    
+    <label>Nova Senha:</label>
+    <input type="password" name="senha" id="senha" required>
+    
+    <label>Confirmar Senha:</label>
+    <input type="password" name="confSenha" id="confSenha" required>
+    
+    <label for="genero_fav">Gênero Favorito:</label>
+    <select name="genero_fav" id="genero_fav" required>
+      <option value="">-- Selecione --</option>
+      <option value="fantasia" <%= user.genero_fav === 'fantasia' ? 'selected' : '' %>>Fantasia</option>
+      <option value="ficcao-cientifica" <%= user.genero_fav === 'ficcao-cientifica' ? 'selected' : '' %>>Ficção Científica</option>
+      <option value="romance" <%= user.genero_fav === 'romance' ? 'selected' : '' %>>Romance</option>
+      <option value="aventura" <%= user.genero_fav === 'aventura' ? 'selected' : '' %>>Aventura</option>
+      <option value="mistério" <%= user.genero_fav === 'mistério' ? 'selected' : '' %>>Mistério</option>
+      <option value="terror" <%= user.genero_fav === 'terror' ? 'selected' : '' %>>Terror</option>
+      <option value="biografia" <%= user.genero_fav === 'biografia' ? 'selected' : '' %>>Biografia</option>
+      <option value="autoajuda" <%= user.genero_fav === 'autoajuda' ? 'selected' : '' %>>Autoajuda</option>
+      <option value="historia" <%= user.genero_fav === 'historia' ? 'selected' : '' %>>História</option>
+      <option value="drama" <%= user.genero_fav === 'drama' ? 'selected' : '' %>>Drama</option>
+      <option value="poesia" <%= user.genero_fav === 'poesia' ? 'selected' : '' %>>Poesia</option>
+      <option value="classicos" <%= user.genero_fav === 'classicos' ? 'selected' : '' %>>Clássicos</option>
+      <option value="romance-policial" <%= user.genero_fav === 'romance-policial' ? 'selected' : '' %>>Romance Policial</option>
+      <option value="juvenil" <%= user.genero_fav === 'juvenil' ? 'selected' : '' %>>Juvenil</option>
+      <option value="literatura-infantojuvenil" <%= user.genero_fav === 'literatura-infantojuvenil' ? 'selected' : '' %>>Literatura Infantojuvenil</option>
+    </select>
+    
+    <button type="submit" id="alterar" name="alterar">Alterar Cadastro</button>
+    <button type="button" class="voltar" onclick="window.location.href='/dashboard'">Voltar</button>
+  </form>
+  <script src="/js/scriptEdit.js"></script>
+</body>
+</html>

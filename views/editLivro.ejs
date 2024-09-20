@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Livro</title>
+  <style>
+      body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 0;
+          background-color: #f0f0f0;
+          font-family: Arial, sans-serif;
+      }
+      h2 {
+          color: black;
+          padding-bottom: 20px;
+      }
+      form {
+          background-color: white;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 90%;
+          max-width: 600px;
+      }
+      label {
+          margin-top: 10px;
+          display: block;
+      }
+      input[type="text"],
+      input[type="date"],
+      select,
+      textarea,
+      input[type="file"] {
+          width: 100%;
+          padding: 10px;
+          margin-top: 5px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+      }
+      button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 15px;
+          margin-top: 10px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+      button a {
+          color: white;
+          text-decoration: none;
+      }
+      button:hover {
+          background-color: #45a049;
+      }
+      .voltar {
+          background-color: red;
+          margin-top: 15px; /* Espaçamento entre os botões */
+      }
+      .voltar:hover {
+          background-color: darkred;
+      }
+  </style>
+</head>
+<body>
+  <h2>Editar Livro</h2>
+
+  <form action="/edit-livro/<%= livro.id_livro %>" method="POST" enctype="multipart/form-data">
+    <label>Título:</label>
+    <input type="text" name="titulo" id="titulo" value="<%= livro.titulo %>" required>
+    
+    <label>Autor:</label>
+    <input type="text" name="autor" id="autor" value="<%= livro.autor %>" required>
+    
+    <label>Gênero:</label>
+    <select name="genero" id="genero" required>
+      <option value=""> -- Selecione --</option>
+      <option value="fantasia" <%= livro.genero === 'fantasia' ? 'selected' : '' %>>Fantasia</option>
+      <option value="ficcao-cientifica" <%= livro.genero=== 'ficcao-cientifica' ? 'selected' : '' %>>Ficção Científica</option>
+      <option value="romance" <%= livro.genero === 'romance' ? 'selected' : '' %>>Romance</option>
+      <option value="aventura" <%= livro.genero === 'aventura' ? 'selected' : '' %>>Aventura</option>
+      <option value="mistério" <%= livro.genero === 'mistério' ? 'selected' : '' %>>Mistério</option>
+      <option value="terror" <%= livro.genero === 'terror' ? 'selected' : '' %>>Terror</option>
+      <option value="biografia" <%= livro.genero === 'biografia' ? 'selected' : '' %>>Biografia</option>
+      <option value="autoajuda" <%= livro.genero === 'autoajuda' ? 'selected' : '' %>>Autoajuda</option>
+      <option value="historia" <%= livro.genero === 'historia' ? 'selected' : '' %>>História</option>
+      <option value="drama" <%= livro.genero === "drama" ? 'selected' : '' %>>Drama</option>
+      <option value="poesia" <%= livro.genero === 'poesia' ? 'selected' : '' %>>Poesia</option>
+      <option value="classicos" <%= livro.genero === 'classicos' ? 'selected' : '' %>>Clássicos</option>
+      <option value="romance-policial" <%= livro.genero === 'romance-policial' ? 'selected' : '' %>>Romance Policial</option>
+      <option value="juvenil" <%= livro.genero === 'juvenil' ? 'selected' : '' %>>Juvenil</option>
+      <option value="literatura-infantojuvenil" <%= livro.genero === 'literatura-infantojuvenil' ? 'selected' : '' %>>Literatura Infantojuvenil</option>
+    </select>
+    
+    <label>Descrição:</label>
+    <textarea name="descricao" id="descricao" cols="40" rows="10" required><%= livro.descricao %></textarea>
+    
+    <label>Data de Lançamento:</label>
+    <input type="date" name="data_lanc" id="data_lanc" value="<%= livro.data_lanc %>" required>
+    
+    <!-- Mostrar a imagem atual -->
+    <% if (livro.imagem) { %>
+      <label>Imagem Atual:</label><br/>
+      <img src="/uploads/<%= livro.imagem %>" alt="Imagem do Livro" width="150">
+    <% } %>
+    
+    <label>Substituir Imagem do Livro:</label>
+    <input type="file" name="imagem" id="imagem" accept="image/*">
+    
+    <button type="submit" id="salvarAlt" name="salvarAlt">Salvar Alterações</button>
+    <button class="voltar"><a href="/listarLivros">Voltar</a></button>
+  </form>
+</body>
+<script src="/js/scriptEditLivro.js"></script>
+</html>

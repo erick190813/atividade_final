@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Usuário</title>
+  <style>
+      body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 0;
+          background-color: #f0f0f0;
+          font-family: Arial, sans-serif;
+      }
+      h1 {
+          color: black;
+          padding-top: 15px;
+          padding-bottom: 30px;
+          margin: 0;
+      }
+      p {
+          margin: 20px 0;
+      }
+      table {
+          margin-top: 20px;
+          border-collapse: collapse;
+          width: 90%;
+          text-align: left;
+          background-color: white;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      th, td {
+          border: 1px solid #4CAF50;
+          padding: 10px;
+      }
+      th {
+          background-color: #4CAF50;
+          color: white;
+      }
+      td {
+          background-color: white;
+      }
+      img {
+          width: 100px;
+          height: 100px;
+      }
+      a {
+          color: #e57373; /* Vermelho */
+          text-decoration: none;
+          font-weight: bold;
+          margin-top: 20px;
+      }
+      a:hover {
+          text-decoration: underline;
+      }
+  </style>
+</head>
+<body>
+  <h1>Bem-vindo, <%= userName %>!</h1>
+  <p>Esta é sua página de perfil. Você não pode gerenciar usuários.</p>
+    
+  <!-- Link para cadastrar um novo livro -->
+  <button><a href="/editar-perfil"> Editar Perfil </a></button>
+  <br/> <br/>
+   
+  <h2>Seus Livros</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Gênero</th>
+        <th>Descrição</th>
+        <th>Data de Lançamento</th>
+        <th>Imagem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% livros.forEach(livro => { %>
+        <tr>
+          <td><%= livro.id_livro %></td>
+          <td><%= livro.titulo %></td>
+          <td><%= livro.autor %></td>
+          <td><%= livro.genero %></td>
+          <td><%= livro.descricao %></td>
+          <td><%= livro.data_lanc %></td>
+          <td>
+            <% if (livro.imagem) { %>
+              <img src="/uploads/<%= livro.imagem %>" alt="Imagem do Livro">
+            <% } else { %>
+              Sem imagem
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <a href="/logout">Logout</a>
+</body>
+</html>

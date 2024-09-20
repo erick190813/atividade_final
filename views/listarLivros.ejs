@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livros Cadastrados</title>
+  <style>
+      body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 0;
+          background-color: #f0f0f0;
+          font-family: Arial, sans-serif;
+      }
+      h1 {
+          color: black;
+          padding-top: 15px;
+          padding-bottom: 30px;
+          margin: 0;
+      }
+      table {
+          margin-top: 20px;
+          border-collapse: collapse;
+          width: 90%;
+          text-align: left;
+          background-color: white;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      th, td {
+          border: 1px solid #4CAF50;
+          padding: 10px;
+      }
+      th {
+          background-color: #4CAF50;
+          color: white;
+      }
+      td {
+          background-color: white;
+      }
+      img {
+          width: 100px;
+          height: 100px;
+      }
+      .voltar {
+          color: #e57373; /* Vermelho */
+          text-decoration: none;
+          font-weight: bold;
+          padding-top: 25px;
+          display: block; /* Para que o padding funcione corretamente */
+          margin-top: 20px;
+      }
+      .voltar:hover {
+          text-decoration: underline;
+      }
+      .button-edit, .button-delete {
+          margin: 5px; /* Ajuste de margem para os botões */
+          padding: 5px 10px; /* Padding para botões */
+          border: none;
+          border-radius: 4px; /* Bordas arredondadas */
+          cursor: pointer;
+      }
+      .button-edit {
+          background-color: #4CAF50;
+          color: white;
+      }
+      .button-delete {
+          background-color: red;
+          color: white;
+      }
+      .actions {
+          display: flex;
+          flex-direction: column; /* Alinha botões um embaixo do outro */
+          align-items: center; /* Centraliza os botões horizontalmente */
+          gap: 15px; /* Espaço entre os botões */
+      }
+  </style>
+</head>
+<body>
+  <h1>Livros Cadastrados</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Gênero</th>
+        <th>Descrição</th>
+        <th>Data de Lançamento</th>
+        <th>Imagem</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% livros.forEach(livro => { %>
+        <tr>
+          <td><%= livro.id_livro %></td>
+          <td><%= livro.titulo %></td>
+          <td><%= livro.autor %></td>
+          <td><%= livro.genero %></td>
+          <td><%= livro.descricao %></td>
+          <td><%= livro.data_lanc %></td>
+          <td>
+            <% if (livro.imagem) { %>
+              <img src="/uploads/<%= livro.imagem %>" alt="Imagem do Livro">
+            <% } else { %>
+              Sem imagem
+            <% } %>
+          </td>
+          <td class="actions">
+            <!-- Botão para editar -->
+            <button class="button-edit"><a href="/edit-livro/<%= livro.id_livro %>" style="color: white; text-decoration: none;">Editar</a></button>
+
+            <!-- Formulário para excluir com confirmação -->
+            <form action="/delete-livro/<%= livro.id_livro %>" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
+              <button type="submit" id="excluir" name="excluir" class="button-delete">Excluir</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <div>
+    <a href="/dashboard" class="voltar">Voltar</a>
+  </div>
+</body>
+<script src="/js/scriptDelLivro.js"></script>
+</html>
